@@ -1,0 +1,146 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>P R &Aacute; C T I C A    4 : CONVOLUCI&Oacute;N Y CORRELACI&Oacute;N DE SE&Ntilde;ALES EN TIEMPO CONTINUO</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-11-12"><meta name="DC.source" content="SySPrac4MarleneCastilloDanielAndoney.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>P R &Aacute; C T I C A    4 : CONVOLUCI&Oacute;N Y CORRELACI&Oacute;N DE SE&Ntilde;ALES EN TIEMPO CONTINUO</h1><!--introduction--><div><ul><li>Castillo Silva Marlene Vanessa</li><li>Andoney Valdez Daniel</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">I N T R O D U C C I &Oacute; N</a></li><li><a href="#2">P R O B L E M A  1</a></li><li><a href="#3">P R O B L E M A  2</a></li><li><a href="#4">P R O B L E M A  3</a></li><li><a href="#5">P R O B L E M A  4</a></li><li><a href="#6">R E F E R E N C I A S</a></li></ul></div><h2>I N T R O D U C C I &Oacute; N<a name="1"></a></h2><p>&iquest;Qu&eacute; es la convoluci&oacute;n en tiempo continuo?</p><p>Mediante la convoluci&oacute;n calcularemos la respuesta de un sistema (y(t)) a una entrada arbitraria (x(t)).</p><p>&iquest;Qu&eacute; es la correlaci&oacute;n en tiempo continuo?</p><p>Es una operaci&oacute;n similar a la convoluci&oacute;n, pero en la correlaci&oacute;n no tenemos que &#8220;reflejar&#8221; una de las se&ntilde;ales. La correlaci&oacute;n nos da una medida de la similitud entre dos se&ntilde;ales. Al no existir la propiedad de conmutaci&oacute;n existen dos correlaciones una es xy, y la otra es yx.</p><h2>P R O B L E M A  1<a name="2"></a></h2><pre class="codeinput">x_t=@ (t) (-t+1).*(escalon(t)-escalon(t-1))+(t-1).*(escalon(t-1)-escalon(t-2));
+h_t=@ (t) escalon(t)-escalon(t-1);
+imagen3();
+<span class="comment">% graficas de manera anal&iacute;tica</span>
+fig();
+<span class="comment">% convoluci&oacute;n</span>
+convconm1(x_t,h_t)
+</pre><img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_01.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_02.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_03.png" alt=""> <h2>P R O B L E M A  2<a name="3"></a></h2><pre class="codeinput">f_t=@(t) t.*escalon(t) - (t-1).*escalon(t-1)- escalon(t-2);
+g_t=@(t) (escalon(t-1))-(escalon(t-3));
+imagen4();
+figu2();
+convconm2(f_t, g_t);
+</pre><img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_04.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_05.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_06.png" alt=""> <h2>P R O B L E M A  3<a name="4"></a></h2><pre class="codeinput">c_t= @(t) escalon(t)-2.*escalon(t-3)+escalon(t-4);
+imagen1();
+figu3();
+convconm3(c_t);
+</pre><img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_07.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_08.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_09.png" alt=""> <h2>P R O B L E M A  4<a name="5"></a></h2><pre class="codeinput">r_t=@(t) escalon(t)- 2.* escalon (t-2)+escalon(t-4);
+s_t=@(t) escalon(t)-2.*escalon(t-3)+escalon(t-4);<span class="comment">%estatica</span>
+imagen2();
+figu4();
+convconm4(r_t, s_t);
+</pre><img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_10.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_11.png" alt=""> <img vspace="5" hspace="5" src="SySPrac4MarleneCastilloDanielAndoney_12.png" alt=""> <h2>R E F E R E N C I A S<a name="6"></a></h2><p><a href="http://www4.tecnun.es/asignaturas/tratamiento%20digital/tema2.pdf">http://www4.tecnun.es/asignaturas/tratamiento%20digital/tema2.pdf</a></p><p><a href="http://www.unet.edu.ve/aula10c/Asenales/Unid01/cuarto05.html">http://www.unet.edu.ve/aula10c/Asenales/Unid01/cuarto05.html</a></p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% P R Á C T I C A    4 : CONVOLUCIÓN Y CORRELACIÓN DE SEÑALES EN TIEMPO CONTINUO 
+% 
+% * Castillo Silva Marlene Vanessa
+% * Andoney Valdez Daniel
+% 
+%% I N T R O D U C C I Ó N 
+% ¿Qué es la convolución en tiempo continuo? 
+%
+% Mediante la convolución calcularemos la respuesta de un sistema (y(t))
+% a una entrada arbitraria (x(t)).
+%
+% ¿Qué es la correlación en tiempo continuo?
+%
+% Es una operación similar a la convolución, pero en la correlación 
+% no tenemos que “reflejar” una de las señales.
+% La correlación nos da una medida de la similitud entre dos señales. Al no 
+% existir la propiedad de conmutación existen dos correlaciones una es 
+% xy, y la otra es yx. 
+%
+%% P R O B L E M A  1
+x_t=@ (t) (-t+1).*(escalon(t)-escalon(t-1))+(t-1).*(escalon(t-1)-escalon(t-2));
+h_t=@ (t) escalon(t)-escalon(t-1);
+imagen3();
+% graficas de manera analítica 
+fig();
+% convolución 
+convconm1(x_t,h_t)
+
+%% P R O B L E M A  2
+f_t=@(t) t.*escalon(t) - (t-1).*escalon(t-1)- escalon(t-2);
+g_t=@(t) (escalon(t-1))-(escalon(t-3));
+imagen4();
+figu2();
+convconm2(f_t, g_t);
+
+%% P R O B L E M A  3
+c_t= @(t) escalon(t)-2.*escalon(t-3)+escalon(t-4);
+imagen1();
+figu3();
+convconm3(c_t);
+
+%% P R O B L E M A  4
+r_t=@(t) escalon(t)- 2.* escalon (t-2)+escalon(t-4);
+s_t=@(t) escalon(t)-2.*escalon(t-3)+escalon(t-4);%estatica
+imagen2();
+figu4();
+convconm4(r_t, s_t);
+
+%% R E F E R E N C I A S 
+%
+% http://www4.tecnun.es/asignaturas/tratamiento%20digital/tema2.pdf
+%
+% http://www.unet.edu.ve/aula10c/Asenales/Unid01/cuarto05.html
+##### SOURCE END #####
+--></body></html>
